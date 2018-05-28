@@ -7,6 +7,13 @@
 #ifndef _SOFT_SPI_H
 #define _SOFT_SPI_H
 
+#include <stdint.h>
+#include <string.h>
+
+#include "puls.h"
+#include "wiringPi.h"
+#include "wiringSoftSpi.h"
+
 // define MOSI MISO CLK CS
 #include "softSpi.h"
 

@@ -1,27 +1,3 @@
-/*
- * pwm.c:
- *	This tests the hardware PWM channel.
- *
- * Copyright (c) 2012-2013 Gordon Henderson. <projects@drogon.net>
- ***********************************************************************
- * This file is part of wiringPi:
- *	https://projects.drogon.net/raspberry-pi/wiringpi/
- *
- *    wiringPi is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU Lesser General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    wiringPi is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU Lesser General Public License for more details.
- *
- *    You should have received a copy of the GNU Lesser General Public License
- *    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
- ***********************************************************************
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -30,31 +6,60 @@
 #include <wiringPi.h>
 #include <puls.h>
 
-//#define CS 5
+#include "ILI9341.h"
+#include "wiringSoftSpi.h"
+#include "custom/utoa.h"
+
+#define M_PI 3.14159
+
+void fill_text(void)
+{
+  ILI9341_setTextBgColor(ILI9341_BLACK);
+
+  ILI9341_setCursor(10, 15);
+  ILI9341_setTextSize(2);
+  ILI9341_setTextColor(ILI9341_CYAN);
+  char lb_real[16] = " bar ";
+  ILI9341_writeString(lb_real);
+
+  ILI9341_setCursor(160, 15);
+  ILI9341_setTextSize(2);
+  ILI9341_setTextColor(ILI9341_CYAN);
+  char lb_max[16] = " Max ";
+  ILI9341_writeString(lb_max);
+}
 
 int main (void)
 {
   if (wiringPiSetup () == -1)
     exit (1) ;
 
-  soft_spi_begin();
-  // soft_spi_end();
+  lcd_set_pins();
+  lcd_reset();
   soft_spi_set_bit_order(SPI_MSB_FIRST);
   soft_spi_set_data_mode(SPI_MODE0);
   soft_spi_set_clock_divider(SPI_CLOCK_DIV2);
+  ILI9341_begin(/*&hspi1*/);
 
-  while (1)
+  ILI9341_setRotation(0); // clear display & draw grid
+  ILI9341_fillScreen(ILI9341_BLACK);
+  ILI9341_setRotation(3);
+  ILI9341_fillScreen(ILI9341_BLUE);
+ 
+  for(uint16_t i = 5; i<320; i+=23) ILI9341_drawLine( i, 10, i, 230, ILI9341_WHITE); //draw vertical lines
+  for(uint16_t i = 10; i<240; i+=22) ILI9341_drawLine( 10, i, 300, i, ILI9341_WHITE); //draw horizontal lines
+  ILI9341_drawLine( 10, 119, 300, 119, ILI9341_WHITE); //draw horizontal lines    
+
+  fill_text();
+
+  while(1)
   {
-    for(uint16_t i =0;i<30;i++)
-    {
-      digitalWrite(CS, LOW);
-      soft_spi_transfer(i);
-      //soft_spi_write(i);
-      digitalWrite(CS, HIGH);
-      //pin_pulse_low_hi(CS, SPI_CLOCK_DIV2);
-      delayMicroseconds(5);
-    }
-    delayMicroseconds(250);
+    digitalWrite(25, 0);
+    delay_tics(500000);
+    //chThdSleepMilliseconds(1);
+    digitalWrite(25, 1);
+    delay_tics(500000);
+    //chThdSleepMilliseconds(1);
   }
 
   return 0 ;

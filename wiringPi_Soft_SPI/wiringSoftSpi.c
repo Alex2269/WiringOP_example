@@ -4,13 +4,8 @@
  * license GPL
 */
 
-#include <stdint.h>
-#include <string.h>
-
-#include "puls.h"
-#include "wiringPi.h"
-
 #include "wiringSoftSpi.h"
+#include "wiringPi.h"
 
 uint8_t clock_polar;
 uint8_t clock_phase;

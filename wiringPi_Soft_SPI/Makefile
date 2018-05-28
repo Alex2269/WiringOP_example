@@ -22,12 +22,15 @@
 #    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 
+CUR_DIR = ./
+CUSTOM = $(CUR_DIR)/custom
 
 #DEBUG	= -g -O0
 DEBUG	= -O3
 CC	= gcc
 INCLUDE	= -I/usr/local/include \
--I./
+-I$(CUR_DIR)/ \
+-I$(CUSTOM)/
 
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
 
@@ -35,8 +38,12 @@ LDFLAGS	= -L/usr/local/lib
 LDLIBS    = -lwiringPi -lwiringPiDev -lpthread -lm
 
 ###############################################################################
-
-SRC	=	wiringSoftSpi.c puls.c softSpi.c 
+SRC = \
+       $(CUR_DIR)/wiringSoftSpi.c \
+       $(CUR_DIR)/puls.c \
+       $(CUSTOM)/ILI9341.c \
+       $(CUR_DIR)/softSpi.c \
+       $(CUSTOM)/utoa.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -44,9 +51,9 @@ BINS	=	$(SRC:.c=)
 
 all:	$(BINS)
 
-softSpi:	wiringSoftSpi.o softSpi.o
+softSpi:	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
 	@echo [link]
-	@$(CC) -o $@ wiringSoftSpi.o softSpi.o $(LDFLAGS) $(LDLIBS)
+	@$(CC) -o $@ wiringSoftSpi.o softSpi.o $(CUSTOM)/ILI9341.o $(LDFLAGS) $(LDLIBS)
 
 .c.o:
 	@echo [CC] $<

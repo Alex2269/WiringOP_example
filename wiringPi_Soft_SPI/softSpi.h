@@ -1,12 +1,20 @@
-/* seting spi pins: */
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __softSpi_H
 #define __softSpi_H
 
-// urer pins:
-#define MOSI 8
-#define MISO 9
-#define CLK 7
-#define CS 3
+/* USER CODE BEGIN Private defines */
+
+#define CS 8
+#define RST 9
+#define LCD_DC 7
+
+#define MOSI 1
+#define CLK 4
+#define MISO 5
+
+#define LCD_RESET 9
+#define LCD_CS 8
+
+/* USER CODE END Private defines */
 
 #endif /* __softSpi_H */
-
