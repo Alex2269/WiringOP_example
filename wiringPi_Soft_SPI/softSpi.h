@@ -9,11 +9,11 @@
 #define LCD_DC 7
 
 #define MOSI 1
-#define CLK 4
 #define MISO 5
+#define CLK 4
 
-#define LCD_RESET 9
-#define LCD_CS 8
+#define LCD_RESET RST
+#define LCD_CS CS
 
 /* USER CODE END Private defines */
 
