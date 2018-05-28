@@ -45,21 +45,19 @@ int main (void)
   ILI9341_fillScreen(ILI9341_BLACK);
   ILI9341_setRotation(3);
   ILI9341_fillScreen(ILI9341_BLUE);
- 
+
   for(uint16_t i = 5; i<320; i+=23) ILI9341_drawLine( i, 10, i, 230, ILI9341_WHITE); //draw vertical lines
   for(uint16_t i = 10; i<240; i+=22) ILI9341_drawLine( 10, i, 300, i, ILI9341_WHITE); //draw horizontal lines
-  ILI9341_drawLine( 10, 119, 300, 119, ILI9341_WHITE); //draw horizontal lines    
+  ILI9341_drawLine( 10, 119, 300, 119, ILI9341_WHITE); //draw horizontal lines
 
   fill_text();
 
   while(1)
   {
     digitalWrite(25, 0);
-    delay_tics(500000);
-    //chThdSleepMilliseconds(1);
+    delay_tics(1200000000);
     digitalWrite(25, 1);
-    delay_tics(500000);
-    //chThdSleepMilliseconds(1);
+    delay_tics(1200000000);
   }
 
   return 0 ;

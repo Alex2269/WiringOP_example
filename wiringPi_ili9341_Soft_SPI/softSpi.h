@@ -1,4 +1,3 @@
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __softSpi_H
 #define __softSpi_H
 
@@ -12,8 +11,8 @@
 #define CLK 4
 #define MISO 5
 
-#define LCD_RESET 9
-#define LCD_CS 8
+#define LCD_RESET RST
+#define LCD_CS CS
 
 /* USER CODE END Private defines */
 
