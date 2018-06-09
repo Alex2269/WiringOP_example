@@ -22,6 +22,7 @@
 #    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 
+PROJ=ili9341softSpi
 CUR_DIR = ./
 CUSTOM = $(CUR_DIR)/custom
 
@@ -51,9 +52,9 @@ BINS	=	$(SRC:.c=)
 
 all:	$(BINS)
 
-ili9341softSpi:	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
+$(PROJ):	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
 	@echo [link]
-	@$(CC) -o $@ wiringSoftSpi.o softSpi.o $(CUSTOM)/ILI9341.o $(LDFLAGS) $(LDLIBS)
+	@$(CC) -o $(PROJ) wiringSoftSpi.o softSpi.o $(CUSTOM)/ILI9341.o $(LDFLAGS) $(LDLIBS)
 
 .c.o:
 	@echo [CC] $<
@@ -61,7 +62,7 @@ ili9341softSpi:	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
 
 clean:
 	@echo "[Clean]"
-	@rm -f $(OBJ) *~ core tags $(BINS)
+	@rm -f $(OBJ) *~ core tags $(BINS) $(PROJ)
 
 tags:	$(SRC)
 	@echo [ctags]

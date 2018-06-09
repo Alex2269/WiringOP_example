@@ -1,3 +1,4 @@
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __softSpi_H
 #define __softSpi_H
 

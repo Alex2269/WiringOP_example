@@ -69,6 +69,12 @@ void writeCommand(uint8_t c) {
   digitalWrite(LCD_CS , HIGH);
 }
 
+/*
+clock_polar ? digitalWrite(CLK, HIGH) : digitalWrite(CLK, LOW);
+delay_tics(del);
+(val & (1<<bit)) ? digitalWrite(MOSI, HIGH) : digitalWrite(MOSI, LOW);
+delay_tics(del);
+ */
 void writeData(uint8_t c) {
   digitalWrite(LCD_DC , HIGH);
   digitalWrite(LCD_CS , LOW);
