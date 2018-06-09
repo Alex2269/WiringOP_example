@@ -10,5 +10,5 @@ cd WiringOP_example/wiringPi_Soft_SPI
 make softSpi
 
 cd WiringOP_example/wiringPi_ili9341_Soft_SPI/
-make softSpi
+make ili9341softSpi
 ```
