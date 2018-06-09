@@ -51,7 +51,7 @@ BINS	=	$(SRC:.c=)
 
 all:	$(BINS)
 
-softSpi:	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
+ili9341softSpi:	$(CUR_DIR)/puls.o $(CUSTOM)/ILI9341.o wiringSoftSpi.o softSpi.o
 	@echo [link]
 	@$(CC) -o $@ wiringSoftSpi.o softSpi.o $(CUSTOM)/ILI9341.o $(LDFLAGS) $(LDLIBS)
 
